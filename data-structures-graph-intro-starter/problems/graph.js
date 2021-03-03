@@ -36,19 +36,25 @@ class Graph {
   breadthFirstTraversal(startingVertex) {
     let queue = [startingVertex];
     let array = [];
-
+    let visited = [startingVertex];
     while (queue.length) {
       let current = queue[0];
       queue.shift();
 
       let list = this.adjList[current];
       // console.log(queue);
-      console.log(list);
+     // console.log(list);
 
       for(let i = 0; i < list.length; i++) {
         let element = list[i];
-        if (queue.includes(element)) continue;
+        if (visited.includes(element)) {
+          continue;
+        
+        }
+       else { 
         queue.push(element);
+        visited.push(element);
+       }
       };
       array.push(current);
 
@@ -57,7 +63,24 @@ class Graph {
   }
 
   depthFirstTraversalIterative(startingVertex) {
-    // Code goes here ...
+    let stack = [startingVertex];
+    let arr = [];
+    let visited = [startingVertex];
+    while (stack.length) {
+      let current = stack.pop();
+      let list = this.adjList[current];
+      
+      for (let i = 0; i < list.length; i++) {
+        const element = list[i];
+        if (!visited.includes(element)) {
+          arr.push(element);
+          visited.push(element);
+          stack.push(element);
+        }
+
+      }
+    }
+    return arr;
   }
 
   depthFirstTraversalRecursive(startingVertex, visited = new Set(), vertices = []) {

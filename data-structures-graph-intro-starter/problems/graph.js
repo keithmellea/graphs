@@ -73,9 +73,16 @@ class Graph {
   }
 
   depthFirstTraversalRecursive(startingVertex, visited = new Set(), vertices = []) {
+    if (visited.has(startingVertex)) return //vertices;
 
+    let list = this.adjList[startingVertex];
+    vertices.push(startingVertex);
+    visited.add(startingVertex);
 
-
+    list.forEach(element => {
+      this.depthFirstTraversalRecursive(element, visited, vertices);
+    });
+    return vertices;
   }
 
 }

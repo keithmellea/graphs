@@ -36,17 +36,24 @@ class Graph {
   breadthFirstTraversal(startingVertex) {
     let queue = [startingVertex];
     let array = [];
-    console.log(startingVertex);
+
     while (queue.length) {
-        let current = queue[0];
-        let list = current.adjList;
-        list.forEach(element => {
-          queue.push(element);
-        });
-        array.push(current);
-        queue.shift();
-        
-      }
+      let current = queue[0];
+      queue.shift();
+
+      let list = this.adjList[current];
+      // console.log(queue);
+      console.log(list);
+
+      for(let i = 0; i < list.length; i++) {
+        let element = list[i];
+        if (queue.includes(element)) continue;
+        queue.push(element);
+      };
+      array.push(current);
+
+    }
+    return array;
   }
 
   depthFirstTraversalIterative(startingVertex) {
